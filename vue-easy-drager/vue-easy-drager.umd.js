@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
 	else if(typeof exports === 'object')
-		exports["vue-dragmove"] = factory();
+		exports["vue-easy-drager"] = factory();
 	else
-		root["vue-dragmove"] = factory();
+		root["vue-easy-drager"] = factory();
 })((typeof self !== 'undefined' ? self : this), function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -443,4 +443,4 @@ function registerDrag() {
 
 /******/ });
 });
-//# sourceMappingURL=vue-dragmove.umd.js.map
+//# sourceMappingURL=vue-easy-drager.umd.js.map

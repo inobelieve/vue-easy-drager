@@ -1,21 +1,21 @@
-# vue-dragmove
+# vue-easy-drager
 基于vue指令制作的拖拽工具
 ## 使用方法
 ###
 - 采用npm或yarn安装
 ```bash
 # 通过 npm 安装
-npm install vue-dragmove --save
+npm install vue-easy-drager --save
 # 通过 yarn 安装
-yarn add vue-dragmove
+yarn add vue-easy-drager
 
 Vue3.+
-import registerDrag from 'vue-dragmove'
+import registerDrag from 'vue-easy-drager'
 registerDrag(app).mount('#app')
 
 Vue2.+
 import Vue from 'vue'
-import registerDrag from 'vue-dragmove'
+import registerDrag from 'vue-easy-drager'
 registerDrag(Vue)
 ```
 - 使用案例

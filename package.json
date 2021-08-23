@@ -2,13 +2,13 @@
   "name": "vue-easy-drager",
   "version": "0.1.1",
   "author": "inobelieve",
-  "main": "vue-dragmove/vue-dragmove.umd.js",
+  "main": "vue-easy-drager/vue-easy-drager.umd.js",
   "license": "ISC",
-  "keywords": ["vue-dragmove"],
+  "keywords": ["vue-easy-drager"],
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --name vue-dragmove --entry ./src/directive/drag.js --target lib",
+    "build": "vue-cli-service build --name vue-easy-drager --entry ./src/directive/drag.js --target lib",
     "build-dev": "vue-cli-service build --name example --entry ./src/main.js --target lib",
     "lint": "vue-cli-service lint"
   },

@@ -433,4 +433,4 @@ function registerDrag() {
 /***/ })
 
 /******/ });
-//# sourceMappingURL=vue-dragmove.common.js.map
+//# sourceMappingURL=vue-easy-drager.common.js.map
