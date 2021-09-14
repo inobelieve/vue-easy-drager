@@ -24,8 +24,11 @@ function registerDrag(app = null) {
   }
 
   let doMove = (el, binding, direction = '') => {
-    document.addEventListener('keydown', setVal)
-    document.addEventListener('keyup', clearVal)
+    console.table({direction})
+    if (!direction) {
+      document.addEventListener('keydown', setVal)
+      document.addEventListener('keyup', clearVal)
+    }
     el.style.cursor = 'move'
     el.setAttribute('draggable', false)
     el.onmousedown = (dom) => {
@@ -41,8 +44,6 @@ function registerDrag(app = null) {
           direction = 'x'
         } else if (keyBoard.Alt) {
           direction = 'y'
-        } else {
-          direction = ''
         }
         // 用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
         let left = (e.clientX - movStartLeft) / scal
@@ -55,10 +56,13 @@ function registerDrag(app = null) {
         let limitY = limit.y || []
         let x = initLeft + left
         let y = initTop + top
-        let leftVal = (limitX[0] || limitX[0] === 0) ? Math.max(x, limitX[0]) : x
-        leftVal = (limitX[1] || limitX[1] === 0) ? Math.min(leftVal, limitX[1]) : leftVal
-        let topVal = (limitY[0] || limitY[0] === 0) ? Math.max(y, limitY[0]) : y
-        topVal = (limitY[1] || limitY[1] === 0) ? Math.min(topVal, limitY[1]) : topVal
+        // 取中间值
+        let leftVal = [x, limitX[0]??-10000, limitX[1]??10000].sort((a, b) => {
+          return a - b
+        })[1]
+        let topVal = [y, limitY[0]??-10000, limitY[1]??10000].sort((a, b) => {
+          return a - b
+        })[1]
         // 是否是一维拖动
         if (direction === 'x') {
           positionLeft = leftVal

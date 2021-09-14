@@ -3,7 +3,9 @@
         <div v-drag="{
               handler: handleDrag,
               limit
-             }" class="drager">1234</div>
+             }" class="drager drager-area">area</div>
+        <div v-drag-x="true" class="drager drager-x">x</div>
+        <div v-drag-y="true" class="drager drager-y">y</div>
     </div>
 </template>
 
@@ -13,14 +15,14 @@
         data () {
             return {
                 limit: {
-                    y: [0, 870],
-                    x: [0, 1820]
+                    y: [0, 200],
+                    x: [0, 500]
                 }
             }
         },
         methods: {
             handleDrag (e) {
-                console.log(e)
+                // console.log(e)
             }
         }
     }
@@ -28,16 +30,30 @@
 
 <style lang="scss" scoped>
     .container {
-        width: 100vw;
-        height: 100vh;
+        width: 600px;
+        height: 300px;
+        border: 1px solid #cccccc;
         background-color: #ffffff;
-        overflow: hidden;
+        overflow: visible;
         position: relative;
+        left: 100px;
+        top: 50px;
         user-select: none;
         .drager {
             width: 100px;
             height: 100px;
-            background-color: #cccccc;
+            background-color: #959595;
+            font-size: 30px;
+            text-align: center;
+            line-height: 100px;
+        }
+        .drager-x {
+            top: 400px;
+            left: 0;
+        }
+        .drager-y {
+            top: 400px;
+            left: 400px;
         }
     }
 </style>
