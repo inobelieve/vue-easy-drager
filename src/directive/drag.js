@@ -17,21 +17,26 @@ function registerDrag(app = null) {
   function setVal(e) {
     keyBoard.Shift = e.shiftKey
     keyBoard.Alt = e.altKey
+    console.log('setVal')
   }
   function clearVal() {
     keyBoard.Shift = false
     keyBoard.Alt = false
   }
+  function addListener() {
+    document.addEventListener('keydown', setVal)
+    document.addEventListener('keyup', clearVal)
+  }
+  function removeListener() {
+    document.removeEventListener('keydown', setVal)
+    document.removeEventListener('keyup', clearVal)
+  }
 
   let doMove = (el, binding, direction = '') => {
-    console.table({direction})
-    if (!direction) {
-      document.addEventListener('keydown', setVal)
-      document.addEventListener('keyup', clearVal)
-    }
     el.style.cursor = 'move'
     el.setAttribute('draggable', false)
     el.onmousedown = (dom) => {
+      addListener()
       // 算出鼠标相对元素的位置
       let initLeft = el.offsetLeft
       let initTop = el.offsetTop
@@ -39,12 +44,7 @@ function registerDrag(app = null) {
       let movStartTop = dom.clientY
       // let scal = countScale()
       let scal = 1
-      document.onmousemove = (e) => {
-        if (keyBoard.Shift) {
-          direction = 'x'
-        } else if (keyBoard.Alt) {
-          direction = 'y'
-        }
+      function handleMousemove (e) {
         // 用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
         let left = (e.clientX - movStartLeft) / scal
         let top = (e.clientY - movStartTop) / scal
@@ -64,9 +64,9 @@ function registerDrag(app = null) {
           return a - b
         })[1]
         // 是否是一维拖动
-        if (direction === 'x') {
+        if (direction === 'x' || (keyBoard.Shift && !direction)) {
           positionLeft = leftVal
-        } else if (direction === 'y') {
+        } else if (direction === 'y' || keyBoard.Alt) {
           positionTop = topVal
         } else {
           positionLeft = leftVal
@@ -81,7 +81,7 @@ function registerDrag(app = null) {
             left: positionLeft,
             top: positionTop
           })
-        } else if (binding.value && typeof binding.value.handler === 'function') {
+        } else if (typeof binding?.value?.handler === 'function') {
           binding.value.handler({
             el: e,
             status: 'draging',
@@ -90,10 +90,12 @@ function registerDrag(app = null) {
           })
         }
       }
+      document.addEventListener('mousemove', handleMousemove)
       // 当鼠标松开，且未触发onmouseup时
       document.onmouseup = () => {
-        document.onmousemove = null
         document.onmouseup = null
+        document.removeEventListener('mousemove', handleMousemove)
+        removeListener()
         if (typeof binding.value === 'function') {
           binding.value({
             el: dom,

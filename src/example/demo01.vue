@@ -3,7 +3,7 @@
         <div v-drag="{
               handler: handleDrag,
               limit
-             }" class="drager drager-area">area{{location.join('-')}}</div>
+             }" class="drager drager-area">xy:{{location.join('-')}}</div>
         <div v-drag-x="{
             limit: limitX
         }" class="drager drager-x">move-x</div>
@@ -36,6 +36,7 @@
         methods: {
             handleDrag (e) {
                 const {left, top} = e
+                // console.table({left, top})
                 this.location = [left, top]
             }
         }
