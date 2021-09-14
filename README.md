@@ -26,10 +26,10 @@ registerDrag(Vue)
 <div v-drag="handler"></div>
 <div v-drag="{
               handler: handleDrag,
-              limit: {y: [0, 1920]}
+              limit: {y: [0, 200],x: [0, 500}
              }"></div>
 ```
-
+![Image text](./src/assets/image/demo.png)
 ### 关于
 - 本组件是由个人发起的非盈利性项目，由作者保留所有权利
 - 如有更多需求或建议，请与[我](https://github.com/inobelieve "作者")联系

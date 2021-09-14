@@ -3,9 +3,15 @@
         <div v-drag="{
               handler: handleDrag,
               limit
-             }" class="drager drager-area">area</div>
-        <div v-drag-x="true" class="drager drager-x">x</div>
-        <div v-drag-y="true" class="drager drager-y">y</div>
+             }" class="drager drager-area">area{{location.join('-')}}</div>
+        <div v-drag-x="{
+            limit: limitX
+        }" class="drager drager-x">move-x</div>
+        <div v-drag-y="{
+            limit: limitY
+        }" class="drager drager-y">move-y</div>
+        <div class="x-line"></div>
+        <div class="y-line"></div>
     </div>
 </template>
 
@@ -17,12 +23,20 @@
                 limit: {
                     y: [0, 200],
                     x: [0, 500]
-                }
+                },
+                limitX: {
+                    x: [0, 500]
+                },
+                limitY: {
+                    y: [0, 400]
+                },
+                location: [0, 0]
             }
         },
         methods: {
             handleDrag (e) {
-                // console.log(e)
+                const {left, top} = e
+                this.location = [left, top]
             }
         }
     }
@@ -43,17 +57,34 @@
             width: 100px;
             height: 100px;
             background-color: #959595;
-            font-size: 30px;
+            font-size: 15px;
             text-align: center;
             line-height: 100px;
+            z-index: 1;
+            text-transform: uppercase;
         }
         .drager-x {
             top: 400px;
             left: 0;
         }
         .drager-y {
-            top: 400px;
-            left: 400px;
+            top: 0;
+            left: 700px;
+        }
+        .x-line {
+            height: 1px;
+            background-color: #ccc;
+            position: absolute;
+            top: 450px;
+            width: 600px;
+        }
+        .y-line {
+            width: 1px;
+            background-color: #ccc;
+            position: absolute;
+            top: 0;
+            left: 750px;
+            height: 500px;
         }
     }
 </style>
