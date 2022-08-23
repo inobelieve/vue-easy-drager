@@ -26,7 +26,7 @@ registerDrag(Vue)
 <div v-drag="handler"></div>
 <div v-drag="{
               handler: handleDrag,
-              limit: {y: [0, 200],x: [0, 500}
+              limit: {y: [0, 200],x: [0, 500]}
              }"></div>
 ```
 ![Image text](./src/assets/image/demo.png)

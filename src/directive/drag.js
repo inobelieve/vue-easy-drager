@@ -44,12 +44,12 @@ function registerDrag(app = null) {
       let movStartTop = dom.clientY
       // let scal = countScale()
       let scal = 1
+      let positionLeft = initLeft
+      let positionTop = initTop
       function handleMousemove (e) {
         // 用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
         let left = (e.clientX - movStartLeft) / scal
         let top = (e.clientY - movStartTop) / scal
-        let positionLeft = initLeft
-        let positionTop = initTop
         // 是否传入限制
         let limit = binding.value.limit || {}
         let limitX = limit.x || []
@@ -99,7 +99,16 @@ function registerDrag(app = null) {
         if (typeof binding.value === 'function') {
           binding.value({
             el: dom,
-            status: 'dragend'
+            status: 'dragend',
+            left: positionLeft,
+            top: positionTop
+          })
+        } else if (typeof binding?.value?.handler === 'function') {
+          binding.value.handler({
+            el: dom,
+            status: 'dragend',
+            left: positionLeft,
+            top: positionTop
           })
         }
       }
