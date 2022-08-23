@@ -36,7 +36,7 @@
         methods: {
             handleDrag (e) {
                 const {left, top} = e
-                // console.table({left, top})
+                console.log(e)
                 this.location = [left, top]
             }
         }
