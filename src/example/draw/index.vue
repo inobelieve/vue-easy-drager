@@ -292,10 +292,10 @@ export default {
     position: fixed;
     z-index: 200;
     .is-clear {
-      cursor: url("../business/images/clear.svg"), auto;
+      cursor: url("./images/clear.svg"), auto;
     }
     .is-drawing {
-      cursor: url("../business/images/pen.svg"), auto;
+      cursor: url("./images/pen.svg"), auto;
     }
     .btn-container {
       position: absolute;
